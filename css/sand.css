@@ -272,9 +272,11 @@ section, footer {
 }
 
 footer {
-  clear : both;
-  font-size: 12px;
-  margin: 20px 0 0 30px;
+	clear     : both;
+	font-size : 12px;
+	margin    : 20px 0 0 30px;
+	position  : absolute;
+	bottom    : 50px;
 }
 
 a {
