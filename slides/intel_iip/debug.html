@@ -1,0 +1,58 @@
+<div class="slide transitionSlide" id="debug-title">
+	<style>
+	.debug .counter:after { background-image: url(slides/intel_iip/images/firebug_sm.png); }
+	</style>
+	<section class="middle"> 
+		<h2>Debugging Tools</h2> 
+		<p>Firebug (for Firefox), Chrome Developer Tools &amp; IE Developer Tools</p> 
+		<img src="slides/intel_iip/images/firebug_lg.png"> 
+	</section>
+</div>
+
+<div class="slide debug" id="firebug-intro">
+	<section>
+		<header>Introduction to Firebug</header>
+		<h2>The Firefox Debugger</h2>
+		<video src="http://getfirebug.com/video/Intro2FB.mp4" controls="controls" width="840" height="472"></video>
+		<footer>Reference: <a href="http://www.getfirefox.com" target="_blank">Download Firefox</a> | <a href="http://www.getfirebug.com" target="_blank">Download Firebug</a></footer>
+	</section>
+</div>
+
+<div class="slide debug" id="other-debuggers">
+	<section>
+		<header>Other Debuggers</header>
+		Both the Chrome and Internet Explorer debuggers have similar functionality to Firebug.
+		<h2>Google Chrome</h2>
+		Comes with a debugger built in.  To access it, go to <b>View --> Developer --> Developer tools</b> or press:
+		<ul>
+			<li>Windows: <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>i</kbd></li>
+			<li>Mac: <kbd>⌥</kbd> + <kbd>⌘</kbd> + <kbd>i</kbd></li>
+		</ul>
+		<h2>Internet Explorer</h2>
+		IE8 and IE9 both come with build in debuggers.  To access, go to <b>View --> Developer Tools</b> or press:
+		<ul>
+			<li><kbd>F12</kbd></li>
+		</ul>
+		Note: The Internet Explorer is buggy.  It is strongly suggested that most debugging be done in either Firefox or Chrome, and the Internet Explorer debugging tools used to solve IE-specific issues.
+		<br /><br />
+		One of the main issues is that IE does not display updated HTML since the debugger was open.  This means popup content, etc will not be displayed unless they were opened before the debugger was opened.
+		<footer>Reference: <a href="http://www.google.com/chrome/" target="_blank">Download Google Chrome</a></footer>
+	</section>
+</div>
+
+<div class="slide debug" id="console-debugging">
+	<section>
+		<header>Console Debugging</header>
+		<h2>Echo basic messages</h2>
+		<pre><b>console.log</b>( any_object );</pre>
+		<h2>Show a stack trace</h2>
+		<pre><b>console.trace</b>()</pre>
+		<h2>Count calls to a specific event</h2>
+		<pre><b>console.count</b>( event_title );</pre>
+		<h2>Group console statements</h2>
+		<pre><b>console.group</b>();
+<b>console.groupEnd</b>();</pre>
+		Note: Do not leave console statements in production code as it will cause JavaScript errors in browsers without debuggers enabled
+		<footer>Reference: <a href="http://getfirebug.com/wiki/index.php/Console_API" target="_blank">Firebug Console API</a></footer>
+	</section>
+</div>

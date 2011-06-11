@@ -1,5 +1,6 @@
 (function(){
-	var slideset = window.location.hash.replace('#', '').split('|')[0];
+	var slideset = /[^/.]+(?=.slides)/.exec(location.href)[0];
+
 	$.get('slides/' + slideset + '.html', function(html){
 		$('.slides').html(html);
 		loadSlideSets();

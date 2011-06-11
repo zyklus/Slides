@@ -283,9 +283,7 @@
 		});
 		var h = window.location.hash;
 		try {
-			h = h.replace('#', '').split('|');
-			this.slideset = h[0];
-			this.current  = h[1];
+			this.current = h.replace('#', '');
 		} catch (e) { /* squeltch */ }
 		this.current || (this.current = "landing-slide");
 		if (!query('#' + this.current)) {
@@ -329,10 +327,10 @@
 			}
 			if (history.pushState) {
 				if (!dontPush) {
-					history.replaceState(this.current, 'Slide ' + this.current, '#' + this.slideset + '|' + this.current);
+					history.replaceState(this.current, 'Slide ' + this.current, '#' + this.current);
 				}
 			} else {
-				window.location.hash = this.slideset + '|' + this.current;
+				window.location.hash = this.current;
 			}
 			for (var x = currentIndex-1; x < currentIndex + 7; x++) {
 				if (this._slides[x-4]) {
