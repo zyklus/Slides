@@ -266,6 +266,7 @@ section, footer {
 }
 
 footer {
+	clear : both;
 	font-size: 12px;
 	margin: 20px 0 0 30px;
 }
@@ -331,6 +332,17 @@ section.middle {
 	width: 900px;
 }
 
+section section {
+	margin-top    : 10px;
+	margin-bottom : 10px;
+}
+section section.left {
+	margin-left : 0px;
+}
+section section.right {
+	margin-right : 0px;
+}
+
 pre {
 	text-align: left;
 	font-family: 'Droid Sans Mono', Courier;
@@ -372,11 +384,21 @@ pre b {
 	text-shadow: #c61800 0 0 1px;
 	/*letter-spacing: -1px;*/
 }
+pre strong {
+  font-weight: normal;
+  color: #0018c6;
+  text-shadow: #0018c6 0 0 1px;	
+}
 pre em {
 	font-weight: normal;
 	font-style: normal;
 	color: #18a600;
 	text-shadow: #18a600 0 0 1px;
+}
+pre i {
+	font-weight : normal;
+	font-style  : normal;
+	color       : #999;
 }
 pre input[type="range"] {
 	height: 6px;

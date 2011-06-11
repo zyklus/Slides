@@ -36,6 +36,106 @@
 	</section>
 </div>
 
+<div class="slide transitionSlide" id="js-intro">
+	<style>
+	.javascript .counter:after { background-image: url(slides/intel_iip/images/js_sm.png); }
+	</style>
+	<section class="middle"> 
+		<h2>JavaScript</h2> 
+		<p>The basics and a few of the nuances</p> 
+		<img src="slides/intel_iip/images/js_lg.png"> 
+	</section>
+</div>
+
+<div class="slide javascript" id="js-basics">
+	<header><span class="js">JS</span> <h1>Basic Objects &amp; Operators</h1></header>
+	<section class="left">
+		<h2>Arrays</h2>
+<pre>var obj = <b>new Array()</b>;
+var obj = <b>[]</b>;
+var obj = <b>[1, 2, 3]</b>;</pre>
+		<h2>Generic Objects (Like Hash-Tables)</h2>
+<pre>var obj = <b>{}</b>;
+var obj = <b>{ key : 'value',
+        key2 : 42 }</b>;</pre>
+		<h2>&amp;&amp; assignments</h2>
+<pre>var obj = true <b>&&</b> 42; <i>// obj = 42</i></pre>
+		<h2>|| assignments</h2>
+<pre>var obj = true <b>||</b> 42; <i>// obj = true</i></pre>
+		<h2>&amp;&amp; takes precedence</h2>
+<pre>var obj = 3 && 2 || 1 && 0; <i>// 2</i></pre>
+	</section>
+	<section class="right">
+		<h2>Falsy Values <small>(Evaluate to false)</small></h2>
+<pre>false
+undefined
+null
+"" <i>// Empty String</i>
+0
+NaN</pre>
+		<h2>Truthy Values <small>(Evaluate to true)</small></h2>
+<pre><em>Everything Else</em>
+---
+<b>"Strings"</b>
+42 <i>// Numbers</i>
+{} <i>// Objects</i>
+function(){} <i>// Functions</i></pre>
+	</section>
+</div>
+
+<div class="slide javascript" id="js-closures">
+	<header><span class="js">JS</span> <h1>Closures</h1></header>
+	<section>Closures are created whenever you have nested functions in JavaScript.  Internal functions are allowed to access external variables, even if called at a later point in the script execution.
+		<section class="left">
+<pre><strong>function</strong> multiplyBy( <b>a</b> ){
+	return <strong>function</strong>( <em>b</em> ){
+		return <b>a</b> * <em>b</em>;
+	}
+}
+
+var times10 = multiplyBy( 10 );
+times10( 5 ); <i>// 50</i></pre>
+		</section>
+
+		<section class="right">
+<pre class="right">DomObj.onclick = <strong>function</strong>( <b>obj</b> ){
+  $.get('/ajax', <strong>function</strong>( <em>resp</em> ){
+    <b>obj</b>.innerHtml = <em>resp</em>;
+  });
+}
+		</section>
+	</section>
+	<footer>Reference: <a href="http://www.htmlgoodies.com/primers/jsp/article.php/3606701/Javascript-Basics-Part-9.htm" target="_blank">Closures</a></footer>
+</div>
+
+<div class="slide javascript" id="js-prototypes">
+	<header><span class="js">JS</span> <h1>Classes &amp; Prototypal Inheritance</h1></header>
+	<section>"Classes" are created in JavaScript through Prototypal inheritance.  All functions in JavaScript can be instantiated to create a new instance of said function.  Prototypes add properties to these instances.  Prototypes, as well as instance properties, are accessed via the keyword "this".
+<pre>function Cat( name ){
+  <em>this.name</em> = name;
+}
+
+<b>Cat.prototype.callOver</b> = function(){
+  alert( <em>this.name</em> + ' says Meow' );
+};
+
+var felix = new Cat( 'Felix' );
+felix.callOver(); <i>// "Felix says Meow"</i>
+
+<i>// Prototypes can be overridden with instance-specific properties</i>
+felix.callOver = function(){
+  alert( <em>this.name</em> + ' walks away silently');
+}
+
+felix.callOver(); <i>// "Felix walks away silently"</i>
+
+<i>// This does not effect other instances of the class</i>
+new Cat('Sam').callOver(); <i>// "Sam says Meow"</i>
+</pre>
+	</section> 
+	<footer>Reference: <a href="http://www.htmlgoodies.com/primers/jsp/article.php/3600451/Javascript-Basics-Part-8.htm" target="_blank">Prototypes</a> &amp; <a href="http://www.htmlgoodies.com/primers/jsp/article.php/3606701/Javascript-Basics-Part-9.htm" target="_blank">Inheritance</a></footer>
+</div>
+
 <div class="slide transitionSlide" id="jquery-intro">
 	<style>
 	.jquery .counter:after { background-image: url(slides/intel_iip/images/jquery_sm.png); }
