@@ -23,7 +23,7 @@
 		<header>Other Debuggers</header>
 		Both the Chrome and Internet Explorer debuggers have similar functionality to Firebug.
 		<h2>Google Chrome</h2>
-		Comes with a debugger built in.  To access it, go to <b>View --> Developer --> Developer tools</b> or press:
+		Comes with a excellent debugger built in.  To access it, go to <b>View --> Developer --> Developer tools</b> or press:
 		<ul>
 			<li>Windows: <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>i</kbd></li>
 			<li>Mac: <kbd>⌥</kbd> + <kbd>⌘</kbd> + <kbd>i</kbd></li>
@@ -33,12 +33,32 @@
 		<ul>
 			<li><kbd>F12</kbd></li>
 		</ul>
-		Note: The Internet Explorer is buggy.  It is strongly suggested that most debugging be done in either Firefox or Chrome, and the Internet Explorer debugging tools used to solve IE-specific issues.
+		Note: Internet Explorer developer tools are buggy.  It is strongly suggested that most debugging be done in either Firefox or Chrome, and the Internet Explorer debugging tools used to solve IE-specific issues.
 		<br /><br />
-		One of the main issues is that IE does not display updated HTML since the debugger was open.  This means popup content, etc will not be displayed unless they were opened before the debugger was opened.
+		One of the main issues is that IE does not display updated HTML since the debugger was opened.  This means popup content, etc will not be displayed unless they were opened before the debugger was opened.
 		<footer>Reference: <a href="http://www.google.com/chrome/" target="_blank">Download Google Chrome</a></footer>
 	</section>
 </div>
+
+<div class="slide debug" id="ie-rendering-modes">
+	<section>
+		<header>Internet Explorer Rendering Modes</header>
+		The IE9 developer tools (and possibly IE8 as well) allow you to easily switch between IE7/8/9 rendering modes.  This means that you are viewing the page in IE9 as a previous browser (IE7 or IE8) would render it.
+		<br /><br />
+		<center>
+			<img src="slides/intel_iip/images/ie_modes.png">
+		</center>
+		<ul>
+			<li>Do not change the document mode, only the browser mode</li>
+			<li>There is no need to ever test in "Quirks Mode" -- This was obsolete even in IE6</li>
+			<li>Although very good for quick testing of older browsers, switching rendering modes in IE9 is not a 100% accurate representation of how older browsers will render a page.</li>
+			<li>If absolutely necessary to test in actual instances of older versions of IE, you can use IETester (which can only be installed if you have <b>not</b> installed IE9)</li>
+			<li>IETester can be installed in a VM environment, likely in Windows XP, for the rare cases when it is necessary to use</li>
+		</ul>
+		<footer>Reference: <a href="http://www.my-debugbar.com/wiki/IETester/HomePage" target="_blank">Download IETester</a></footer>
+	</section>
+</div>
+
 
 <div class="slide debug" id="console-debugging">
 	<section>

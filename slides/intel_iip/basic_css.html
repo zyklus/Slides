@@ -1,10 +1,219 @@
 <div class="slide transitionSlide" id="basic-css-title">
 	<style>
-	.css .counter:after { background-image: url(slides/intel_iip/images/css_sm.png); }
+	.basic-css .counter:after { background-image: url(slides/intel_iip/images/css_sm.png); }
 	</style>
 	<section class="middle"> 
 		<h2>CSS</h2> 
 		<p>Presentation &amp; Styling</p> 
 		<img src="slides/intel_iip/images/css_lg.png"> 
 	</section>
+</div>
+
+<div class="slide basic-css" id="css-box-model">
+	<style>
+	#css-box-model .margin {
+		background : #FCC;
+	}
+	#css-box-model .border {
+		background : #CCF;
+	}
+	#css-box-model .padding {
+		background : #CFC;
+	}
+	#css-box-model .content {
+		background : #FFF;
+	}
+	</style>
+	<section>
+		<header><span class="css">CSS</span> The Box Model</header>
+		<section class="left">
+			<div class="margin" style="padding:10px;display:inline-block;position:relative;" class="demo">
+				<div class="border" style="padding:2px;">
+					<div class="padding" style="padding:10px;">
+						<div class="content">Content</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="right">
+			<table>
+				<tr>
+					<td>Margin :</td>
+					<td><input></td>
+				</tr>
+				<tr>
+					<td>Border :</td>
+					<td><input></td>
+				</tr>
+				<tr>
+					<td>Padding :</td>
+					<td><input></td>
+				</tr>
+			</table>
+		</section>
+	</section>
+</div>
+
+<div class="slide basic-css" id="css-position">
+	<section>
+		<header><span class="css">CSS</span> Positioning</header>
+	</section>
+</div>
+
+<div class="slide basic-css" id="selectors">
+	<section>
+		<header><span class="css">CSS</span> Selectors</header>
+		<h2>Tag Selector</h2>
+<pre>html: &lt;<b>div</b>&gt;&lt;/div&gt; &lt;<b>div</b>&gt;&lt;/div&gt;
+css:  <em>div</em> { ... }</pre>
+		<h2>ID Selector</h2>
+<pre>html: &lt;<b>div</b> id="<strong>myDiv</strong>"&gt;&lt;/div&gt;
+css:  <em>#myDiv</em> { ... }</pre>
+		<h2>Class Selector</h2>
+<pre>html: &lt;<b>div</b> class="foo <strong>bar</strong> more">&lt;/div&gt;
+css:  <em>.bar</em> { ... }</pre>
+		<h2>Child Selector</h2>
+<pre>html: &lt;div id="<strong>cars</strong>"&gt;&lt;<b>span</b>&gt;&lt;/span&gt;&lt;/div&gt;
+css:  <em>#cars span</em> { ... }</pre><div>
+	</section>
+</div>
+
+<div class="slide basic-css" id="css-sprites">
+	<style>
+	#css-sprites .sprite {
+		background : url(slides/intel_iip/images/character_sprites.png);
+		width      : 32px;
+		height     : 32px;
+		display    : inline-block;
+		cursor     : pointer;
+	}
+	#walking-sprite {
+		position : absolute;
+		cursor   : default;
+	}
+	#css-sprites .sprite.char1 { background-position :    0px    0px; }
+	#css-sprites .sprite.char2 { background-position :  -96px    0px; }
+	#css-sprites .sprite.char3 { background-position : -192px    0px; }
+	#css-sprites .sprite.char4 { background-position : -288px    0px; }
+	#css-sprites .sprite.char5 { background-position :    0px -128px; }
+	#css-sprites .sprite.char6 { background-position :  -96px -128px; }
+	#css-sprites .sprite.char7 { background-position : -192px -128px; }
+	#css-sprites .sprite.char8 { background-position : -288px -128px; }
+
+	#css-sprites img {
+		padding : 0 0 10px 10px;
+		float   : right;
+	}
+
+	#css-sprites input {
+		width  : 40px;
+		border : 1px solid #EEE;
+	}
+
+	#demo_sprite {
+		border : 1px solid #000;
+	}
+	</style>
+	<script>
+	(function(){
+		var sprite = $('#walking-sprite'),
+		     slide = sprite.closest('.slide'),
+		    sWidth = slide.outerWidth() - 32,
+		   sHeight = slide.outerHeight() - 32,
+		      left = 0,
+		       top = 0,
+		       dir = 1,
+		  stepSize = 1,
+		      step = 0,
+		   xOffset = 0,
+		   yOffset = 0,
+		   spriteX = 0,
+		   spriteY = 0,
+
+		interval = setInterval(function(){
+			// randomly turn
+			(Math.random() < .01) && (dir = 0|Math.random() * 4);
+
+			(dir == 0) && (top  <= 0)       && (dir = 2);
+			(dir == 1) && (left >= sWidth)  && (dir = 3);
+			(dir == 2) && (top  >= sHeight) && (dir = 0);
+			(dir == 3) && (left <= 0)       && (dir = 1);
+
+			sprite.css({
+				              left : left += (dir == 1 ? stepSize : dir == 3 ? -stepSize : 0),
+				               top : top  += (dir == 2 ? stepSize : dir == 0 ? -stepSize : 0),
+				backgroundPosition : (((((0|++step/10) % 4) || 2) - 1) * -32 + xOffset) + 'px ' + ([-96, -64, 0, -32][dir] + yOffset) + 'px'
+			});
+		}, 20);
+
+		window['css-sprites-focus'] = function(){};
+		window['css-sprites-blur']  = function(){};
+
+		$('#css-sprites').delegate('.sprite', 'click', function(){
+			var char = (/char(\d)/.exec(this.className)||0)[1];
+			if(!char){ return; }
+
+			switch(char){
+				case '1': xOffset =    0; yOffset =    0; break;
+				case '2': xOffset =  -96; yOffset =    0; break;
+				case '3': xOffset = -192; yOffset =    0; break;
+				case '4': xOffset = -288; yOffset =    0; break;
+				case '5': xOffset =    0; yOffset = -128; break;
+				case '6': xOffset =  -96; yOffset = -128; break;
+				case '7': xOffset = -192; yOffset = -128; break;
+				case '8': xOffset = -288; yOffset = -128; break;
+			}
+		})
+
+		function updateDemoSprite(){
+			$('#demo_sprite').css({ backgroundPosition : spriteX + 'px ' + spriteY + 'px' });
+		}
+
+		$('#sprite-x,#sprite-y').bind('keydown', function(ev){
+			if(ev.which != 38 && ev.which != 40){ return; }
+
+			var offset = ev.which == 38 ? 1 : -1;
+
+			this.value = this.id == 'sprite-x'
+				? spriteX += offset
+				: spriteY += offset;
+
+			updateDemoSprite();
+		}).bind('keyup', function(ev){
+			this.id == 'sprite-x'
+				? spriteX = parseInt(this.value)
+				: spriteY = parseInt(this.value);
+
+			updateDemoSprite();
+		});
+	})();
+	</script>
+	<section>
+		<header><span class="css">CSS</span> CSS Sprites</header>
+		<img src="slides/intel_iip/images/character_sprites.png"> You can think of CSS Sprites as creating a "window" into a large array of images.<p />Take the "sprite map" on the right as example, which consists of various frames of animations.  Each image in the map is exactly 32x32 pixels in size.  If we create a 32x32 pixel box and position the image "behind" that box, we can choose which of the 128 images to display:
+		<br /><br /><br />
+		<center>
+		<div class="sprite" id="demo_sprite"></div>
+</center>
+		<p style="clear:both;" />The CSS for this is (adjust the numbers below using numbers or your arrow keys):
+<pre>.sprite {
+  width               : 32px;
+  height              : 32px;
+  background-image    : url(/path/to/image.png);
+  background-position : <input value="0" id="sprite-x">px <input value="0" id="sprite-y">px;
+}</pre>
+		Note that in order to move the image down &amp; right, your numbers are negative.
+		
+		<footer>Choose One:
+			<div class="sprite char1"></div>
+			<div class="sprite char2"></div>
+			<div class="sprite char3"></div>
+			<div class="sprite char4"></div>
+			<div class="sprite char5"></div>
+			<div class="sprite char6"></div>
+			<div class="sprite char7"></div>
+			<div class="sprite char8"></div>
+		</footer>
+	</section>
+	<div class="sprite" id="walking-sprite"></div>
 </div>
