@@ -415,6 +415,7 @@ pre i {
 	font-weight : normal;
 	font-style  : normal;
 	color       : #999;
+	text-shadow : #999 0 0 1px;
 }
 pre input[type="range"] {
   height: 6px;
@@ -445,7 +446,8 @@ video {
 
 .css,
 .js,
-.html,
+.debugger,
+.jq,
 .key {
   font-family: 'Arial';
   color: black;
@@ -472,7 +474,8 @@ video {
 
 :not(header) > .css,
 :not(header) > .js,
-:not(header) > .html,
+:not(header) > .debugger,
+:not(header) > .jq,
 :not(header) > .key {
   margin: 0 5px;
   bottom: 4px;
@@ -488,7 +491,7 @@ video {
   background-color: #4f4;
   background: -moz-linear-gradient(left top, #4f4, #afa);
 }
-.html {
+.debugger {
   background: -webkit-gradient(linear, left top, left bottom, from(#e88), to(#fee));
   background-color: #e88;
   background: -moz-linear-gradient(left top, #e88, #fee);

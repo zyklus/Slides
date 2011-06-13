@@ -11,26 +11,26 @@
 
 <div class="slide jquery" id="jquery-root">
 	<section>
-		<header>The $ Function</header>
+		<header><span class="jq">jQuery</span> The $ Function</header>
 		jQuery's $ function is overloaded in several ways:
 		<h2>As a selector</h2>
 
 <pre>
-var elements = $('#myID span');
+var elements = <b>$(</b><em>'#myID span'</em><b>);</b>
 </pre>
 
 		<h2>As a DOM Creation Utility</h2>
 
 <pre>
-var node = $('&lt;div id="myID"&gt;&lt;span&gt;Hello, World!&lt;span&gt;&lt;/div&gt;');
+var node = <b>$(</b><em>'&lt;div id="myID"&gt;&lt;span&gt;Hello, World!&lt;span&gt;&lt;/div&gt;'</em><b>);</b>
 </pre>
 
 		<h2>As an onload handler</h2>
 
 <pre>
-$(function(){
-  // Any code put here will fire when the document is loaded
-});
+<b>$(</b><em>function(){
+  <i>// Any code put here will fire when the document is loaded</i>
+}</em><b>);</b>
 </pre>
 
 	</section>
@@ -38,7 +38,7 @@ $(function(){
 
 <div class="slide jquery" id="jquery-selectors">
 	<section>
-		<header>CSS 2/3 Selectors</header>
+		<header><span class="jq">jQuery</span> <span class="css">CSS</span> CSS 2/3 Selectors</header>
 		In addition to fully supporting all of the CSS1 selectors, jQuery fully supports all CSS2/3 selectors regardless of whether or not the current browser supports them.  These selectors can not be used in stylesheets due to the fact that IE7 does not support them.
 		<h2>Immediate Child Selector</h2>
 <pre>
@@ -65,12 +65,12 @@ css : <em>input:checked</em> { ... }
 </pre>
 
 	</section>
-	<footer>Reference: <a href="http://www.w3.org/TR/css3-selectors/#selectors" target="_blank">CSS Selectors</a></footer>
+	<footer>Reference: <a href="http://www.w3.org/TR/css3-selectors/#selectors" target="_blank">CSS Selectors</a> | <a href="http://api.jquery.com/category/selectors/" target="_blank">jQuery Selectors</a></footer>
 </div>
 
 <div class="slide jquery" id="jquery-more-selectors">
 	<section>
-		<header>More CSS 2/3 Selectors</header>
+		<header><span class="jq">jQuery</span> <span class="css">CSS</span> More CSS 2/3 Selectors</header>
 		<h2>:enabled and :disabled Selectors</h2>
 <pre>
 html: &lt;<b>input</b> <strong>disabled</strong> /&gt;
@@ -83,73 +83,304 @@ html: &lt;<b>input</b> <strong>disabled</strong> /&gt;
 css : <em>input:not(:enabled)</em> { ... }
 </pre>
 
-		<h2>:even and :odd Selectors</h2>
+		<h2>:even, :odd and :eq Selectors</h2>
 <pre>
 html: &lt;<strong>ul</strong>&gt;
-    &lt;<b>li</b>&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;/li&gt;
-    &lt;<b>li</b>&gt;&lt;/li&gt;
     &lt;li&gt;&lt;/li&gt;
     &lt;<b>li</b>&gt;&lt;/li&gt;
   &lt;/ul&gt;
 
 css : <em>ul li:odd</em> { ... }            <i>/* jQuery-specific syntax */</i>
+css : <em>ul li:eq(1)</em> { ... }          <i>/* jQuery-specific syntax */</i>
 css : <em>ul li:nth-child(odd)</em> { ... } <i>/* normal CSS syntax */</i>
 </pre>
+
+		<h2>:has Selector (jQuery-specific)</h2>
+
+<pre>
+html: &lt;div&gt;&lt;/div&gt; &lt;<b>div</b>&gt;&lt;<strong>span</strong>&gt;&lt;/span&gt;&lt;/div&gt;
+css : <em>div:has(span)</em> { ... }
+</pre>
+	
 	</section>
 </div>
 
 
 <div class="slide jquery" id="jquery-sets">
 	<section>
-		<header>Sets</header>
+		<header><span class="jq">jQuery</span> Sets</header>
+		Whenever selecting elements with the jQuery selector, e.g. <code>$('#myID span')</code>, jQuery returns a custom "array-like" object.  This object is used to manipulate <b>every</b> element in this set at the same time.  For example, if you wanted to hide every element on the page with a certain classname:
+
+<pre>$('.className')<b>.hide()</b></pre>
+
+		In certain instances, you need or want references to the actual DOM objects that the set is referencing:
+
+<pre>
+var nodes = $('.className');
+nodes<b>.get()</b>;  <i>// returns an array of DOM Nodes</i>
+nodes<b>.get(5)</b>; <i>// returns the 6th element</i>
+nodes<b>[5]</b>;     <i>// returns the 6th element</i>
+</pre>
+
+		<h2>Chaining</h2>
+		In most cases, jQuery methods return another jQuery object, so you can chain methods together:
+
+<pre>
+$('.className').<b>show</b>().<b>addClass</b>('active').<b>animate</b>({ left : 100 });
+</pre>
+
+		<h2>Getting Data</h2>
+		Whenever a jQuery function returns non-DOM Node data, e.g. <code>.width()</code> or <code>.attr('id')</code>, you are unable to chain because the method returns a primary JS object:
+
+<pre>
+$('.className')<b>.width()</b>; <i>// width, e.g. "100"</i>
+</pre>
 	</section>
+</div>
+
+<div class="slide jquery" id="jquery-common-methods">
+	<section>
+		<header><span class="jq">jQuery</span> Common Methods</header>
+		<section class="left">
+			<h2>Setters</h2>
+			Will return a jQuery object
+<pre>
+nodes.<b>addClass</b>   ('someClass');
+nodes.<b>removeClass</b>('someClass');
+nodes.<b>css</b>        ('prop', 'value');
+nodes.<b>css</b>        ({ key:val });
+nodes.<b>html</b>       ('&lt;p&gt;html&lt;/p&gt;');
+nodes.<b>text</b>       ('new text');
+nodes.<b>val</b>        (42);
+nodes.<b>focus</b>      ();
+nodes.<b>blur</b>       ();
+nodes.<b>show</b>       ();
+nodes.<b>hide</b>       ();
+nodes.<b>attr</b>       ('key', 'value');
+nodes.<b>removeAttr</b> ('key');
+nodes.<b>prop</b>       ('key', 'value');
+nodes.<b>removeProp</b> ('key');
+</pre>
+		</section>
+
+		<section class="right">
+			<h2>Getters</h2>
+			will return a native JS object
+<pre>
+nodes.<b>offset</b>(); <i>// document offset</i>
+nodes.<b>position</b>(); <i>// parent offset</i>
+nodes.<b>val</b>(); <i>// form element value</i>
+nodes.<b>css</b>('prop');   <i>// val</i>
+nodes.<b>html</b>();        <i>// html</i>
+nodes.<b>text</b>();        <i>// text</i>
+nodes.<b>remove</b>();      <i>// nodes</i>
+nodes.<b>width</b>();       <i>// width</i>
+nodes.<b>height</b>();      <i>// height</i>
+nodes.<b>outerWidth</b>();  <i>// + margins</i>
+nodes.<b>outerHeight</b>(); <i>// + margins</i>
+nodes.<b>eq</b>(5);         <i>// 6th node</i>
+nodes.<b>attr</b>('key');   <i>// attr</i>
+nodes.<b>prop</b>('key');   <i>// prop</i>
+</pre>
+		</section>
+	</section>
+	<footer>Reference: <a href="http://api.jquery.com/category/css/" target="_blank">jQuery CSS Methods</a> | <a href="http://api.jquery.com/category/manipulation/" target="_blank">jQuery Manipulation Methods</a>
 </div>
 
 <div class="slide jquery" id="jquery-events">
 	<section>
-		<header>Event Listners</header>
+		<header><span class="jq">jQuery</span> Event Listners</header>
+		In JavaScript, most code is run in response to an event: The user clicks on a button, the user moves their mouse over a drop-down, etc.
+		<h2>Binding (Attaching) Event Handlers</h2>
+
+<pre>
+$('.className').<b>bind</b>(<strong>'click'</strong>, function(ev){ <i>/* .. */</i> });
+$('.className').<b>bind</b>(<strong>'change keypress keyup'</strong>, function(ev){ <i>/* .. */</i> });
+$('.className').<b>click</b>(function(ev){ <i>/* ... */</i> })
+</pre>
+
+		<h2>Un-Binding Event Handlers</h2>
+
+<pre>
+$('.className').<b>unbind</b>(<strong>'click'</strong>, handlerFn <i>/* Optional */</i>);
+<i>// Note: handlerFn must reference the same function that was originally
+         bound</i>
+</pre>
+
+		<h2>"this"</h2>
+
+<pre>
+$('.className').bind('click', function(ev){
+	alert(<b>this</b>.id); <i>// this === the DOM Node clicked on</i>
+});
+</pre>
+
+		<h2>Event object</h2>
+		The above references to <code>ev</code> in the function declarations refer to the jQuery event object, which normalizes event data like mouse position, and provides a way to stop event propagation and prevent default actions.
 	</section>
+	<footer>Reference: <a href="http://api.jquery.com/category/events/" target="_blank">jQuery Events</a> | <a href="http://api.jquery.com/category/events/event-object/" target="_blank">jQuery Event Object</a></footer>
 </div>
+
+<div class="slide jquery" id="jquery-live">
+	<section>
+		<header><span class="jq">jQuery</span> "Live" and "Delegate" Event Listners</header>
+		<h2>Background</h2>
+		In many circumstances, it may be desired to have an event listener on many, many similar objects such as cells in a table or items in a list.  In this case it is inefficient to attach an event listener to every element.  Instead, an event listener can be attached to the parent element.  In JavaScript, events propagate up the DOM tree until they are cancelled, so attaching a "click" listener, for example, to a table will catch all click events on every cell in that table.  jQuery provides easy ways to do this:
+
+		<h2>Live</h2>
+<pre>
+$('#tableID td').<b>live</b>(<strong>'click'</strong>, function(ev){
+	<i>// "this" refers to the td cell that was clicked on</i>
+});
+</pre>
+
+		<h2>Delegate</h2>
+		"Live" can sometimes be inefficient since the events are internally attached to the body and jQuery will be forced to check any click, anywhere on the page, to see if it was a match.  Delegate solves this problem by attaching the event listener to the object specified:
+<pre>
+$('#tableID').<b>delegate</b>(<strong>'td'</strong>, <strong>'click'</strong>, function(ev){ ... });
+</pre>
+		Note: Unlike binding to a single object using <code>.bind</code>, <code>.click</code>, etc, <code>.live</code> and <code>.delegate</code> will function on elements that are added to the page <b>after</b> the event handler was attached.  This is very useful for pages that are dynamically modified since event handlers do not need to be re-attached after every page modification.
+	</section>
+	<footer>Reference: <a href="http://api.jquery.com/live/" target="_blank">jQuery live</a> | <a href="http://api.jquery.com/delegate/" target="_blank">jQuery delegate</a></footer>
+</div>
+
 
 <div class="slide jquery" id="jquery-traversing">
 	<section>
-		<header>Traversing the DOM</header>
-	</section>
-</div>
+		<header><span class="jq">jQuery</span> Traversing the DOM</header>
+<pre>
+var nodes = $('.className');
 
-<div class="slide jquery" id="jquery-manipulation">
-	<section>
-		<header>Manipulating the DOM</header>
-	</section>
-</div>
+nodes.<b>closest</b> ('selector'); <i>// each element is replaced with the nearest
+	                       div UP the tree, including itself</i>
+nodes.<b>parent</b>  ('selector'); <i>// similar to closest; does not include self</i>
+nodes.<b>find</b>    ('selector'); <i>// child elements that match selector</i>
+nodes.<b>children</b>();           <i>// direct child elements</i>
+nodes.<b>children</b>('selector'); <i>// direct child elements that match selector</i>
+nodes.<b>filter</b>  ('selector'); <i>// current elements that match selector</i>
+nodes.<b>filter</b>  (function);   <i>// filter current elements by function</i>
+</pre>
 
-<div class="slide jquery" id="jquery-attributes">
-	<section>
-		<header>Attributes</header>
+		<h2>Example and .end()</h2>
+		.end() undoes the last action that changed the jQuery set:
+<pre>
+$('#tableID')                    <i>// #tableID</i>
+  .<b>find</b>('tr:odd')                <i>// #tableID tr:odd</i>
+    .css({ borderColor: 'red' })
+    .<b>find</b>('td:first')            <i>// #tableID tr:odd td:first</i>
+      .addClass('title')
+      .<b>end</b>()                     <i>// #tableID tr:odd</i>
+    .<b>end</b>()                       <i>// #tableID</i>
+  .delegate('td', 'click', fnClick);
+</pre>
 	</section>
+	<footer>Reference: <a href="http://api.jquery.com/category/traversing/" target="_blank">jQuery Traversing</a></footer>
 </div>
 
 <div class="slide jquery" id="jquery-data">
 	<section>
-		<header>Data</header>
+		<header><span class="jq">jQuery</span> Data</header>
+		Partially due to various browsers (IE) having internal memory leak issues during garbage collection, jQuery provides an internal structure for storing data "on" DOM elements.  Use this whenever it is necessary to have JavaScript data attached to a specific event.  This becomes especially useful in conjunction with <code>.live</code> or <code>.delegate</code>:
+
+		<h2>Storing Data</h2>
+<pre>
+var node = $('#someID');
+node.<b>data</b>(<strong>'key', 'value'</strong>);
+</pre>
+
+		<h2>Retrieving Data</h2>
+<pre>
+var node = $('#someID');
+node.<b>data</b>(<strong>'key'</strong>);
+
+node.<b>data</b>(); <i>// returns an object containing all stored data</i>
+</pre>
 	</section>
+	<footer>Reference: <a href="http://api.jquery.com/data/" target="_blank">jQuery Data Object</a></footer>
 </div>
 
 <div class="slide jquery" id="jquery-animations">
 	<section>
-		<header>Animations</header>
+		<header><span class="jq">jQuery</span> Animations</header>
+		<h2>Generic Animations</h2>
+<pre>
+nodes.<b>fadeIn</b>( duration_in_ms <i>/* optional */</i>, callbackFn <i>/* optional */</i>);
+nodes.<b>fadeOut</b>();
+
+nodes.<b>slideUp</b>();   <i>// hides the nodes from bottom --> top</i>
+nodes.<b>slideDown</b>(); <i>// shows the nodes from top --> bottom</i>
+</pre>
+		<h2>Custom Animations</h2>
+<pre>
+nodes.<b>animate</b>({ width : 200, height : 400, left : 600, top : 800 });
+</pre>
+
+		<h2>Chaining Animations</h2>
+<pre>
+nodes.<b>fadeIn</b>().<b>animate</b>({ left: '+=200' }).<b>fadeOut</b>();
+</pre>
 	</section>
+	<footer>Reference: <a href="http://api.jquery.com/category/effects/" target="_blank">jQuery Effects</a>
 </div>
 
 <div class="slide jquery" id="jquery-ajax">
 	<section>
-		<header>AJAX</header>
+		<header><span class="jq">jQuery</span> AJAX</header>
+		<h2>AJAX in General</h2>
+		AJAX is a term coined that simply involves sending / receiving data between the client and server without reloading the entire page.  From a client point-of-view, JavaScript asks for a page, receives a response, and processes it.
+		
+		<h2>AJAX in jQuery</h2>
+<pre>
+$.<b>get</b>( <strong>'/path/to/url'</strong>, <strong>{ key : value }</strong>, function(data){
+  <i>// handle data</i>
+});
+
+$.<b>post</b>( ... );
+$.<b>ajax</b>({ url: '/path/to/url', success: function(data){ ... } });
+</pre>
+
+		<h2>Asynchronous handling</h2>
+		Note that all jQuery AJAX functions are, by default, asynchronous.  This means that JavaScript code will continue to run in the background while the HTTP request is processing.  When the request is complete, a callback is triggered.  If requests are done in a synchronous manner, all actions on the page get blocked (the user is unable to type, click, etc) until the request is finished.  This is strongly discouraged.
+
+<pre>
+var x = 10;
+$.get('/some/url', function(){
+  x = 20;
+});
+<i>// x == 10</i>
+</pre>
+
 	</section>
+	<footer>Reference: <a href="http://www.htmlgoodies.com/primers/jsp/article.php/3608046/Javascript-Basics-Part-10.htm" target="_blank">Introduction to AJAX</a> | <a href="http://api.jquery.com/category/ajax/" target="_blank">jQuery AJAX Functions</a></footer>
 </div>
 
 <div class="slide jquery" id="jquery-helper">
 	<section>
-		<header>Helper Functions</header>
+		<header><span class="jq">jQuery</span> Helper Functions</header>
+		jQuery provides many helper functions that are meant to operate on Arrays and jQuery sets.
+		<h2>noop</h2>
+		Does nothing, is used as a "safe default":
+<pre>
+function(callback){
+  (callback || $.<b>noop</b>)();
+}
+</pre>
+
+		<h2>Each</h2>
+<pre>
+$('div').<b>each</b>(function(){
+  var $this = $(this);
+  $this.addClass($this.width() > 200 ? 'large' : 'small');
+});
+</pre>
+
+		<h2>Map</h2>
+<pre>
+$('div').map(function(){
+  return $(this).width();
+});
+<i>// e.g. [100, 225, 42, 600]</i>
+</pre>
 	</section>
+	<footer>Reference: <a href="http://api.jquery.com/category/utilities/" target="_blank">jQuery Utilities</a></footer>
 </div>

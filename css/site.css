@@ -33,3 +33,9 @@ li * {
 .with-code {
 	line-height : 1.5em;
 }
+
+.slide .jq {
+	background       : -webkit-gradient(linear, left top, left bottom, from(#88E), to(#EEF));
+	background-color : #88E;
+	background       : -moz-linear-gradient(left top, #88E, #EEF);
+}
