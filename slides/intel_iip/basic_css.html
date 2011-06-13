@@ -17,7 +17,7 @@
 		CSS can be applied in two ways.  Either via a stylsheet:
 <pre>
 &lt;<b>style</b>&gt;
-selector {
+selector, another_selector {
   property : value;
 }
 &lt;<b>/style</b>&gt;</pre>
@@ -51,11 +51,19 @@ css:  <em>div</em> { ... }</pre>
 <pre>html: &lt;<b>div</b> id="<strong>myDiv</strong>"&gt;&lt;/div&gt;
 css:  <em>#myDiv</em> { ... }</pre>
 		<h2>Class Selector</h2>
-<pre>html: &lt;<b>div</b> class="foo <strong>bar</strong> more">&lt;/div&gt;
+<pre>html: &lt;<b>div</b> class="foo <strong>bar</strong> more">&lt;/div&gt; &lt;<b>span</b> class="<strong>bar</strong>"&gt;&lt;/span&gt;
 css:  <em>.bar</em> { ... }</pre>
 		<h2>Child Selector</h2>
-<pre>html: &lt;div id="<strong>cars</strong>"&gt;&lt;<b>span</b>&gt;&lt;/span&gt;&lt;/div&gt;
-css:  <em>#cars span</em> { ... }</pre><div>
+<pre>
+html: &lt;div id="<strong>cars</strong>"&gt;
+        &lt;<b>span</b>&gt;&lt;/span&gt;
+        &lt;<b>span</b>&gt;
+          &lt;<b>span</b>&gt;&lt;/span&gt;
+        &lt;/span&gt;
+      &lt;/div&gt;
+css:  <em>#cars span</em> { ... }
+</pre>
+
 	</section>
 </div>
 

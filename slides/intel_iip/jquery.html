@@ -12,12 +12,103 @@
 <div class="slide jquery" id="jquery-root">
 	<section>
 		<header>The $ Function</header>
+		jQuery's $ function is overloaded in several ways:
+		<h2>As a selector</h2>
+
+<pre>
+var elements = $('#myID span');
+</pre>
+
+		<h2>As a DOM Creation Utility</h2>
+
+<pre>
+var node = $('&lt;div id="myID"&gt;&lt;span&gt;Hello, World!&lt;span&gt;&lt;/div&gt;');
+</pre>
+
+		<h2>As an onload handler</h2>
+
+<pre>
+$(function(){
+  // Any code put here will fire when the document is loaded
+});
+</pre>
+
 	</section>
 </div>
 
 <div class="slide jquery" id="jquery-selectors">
 	<section>
 		<header>CSS 2/3 Selectors</header>
+		In addition to fully supporting all of the CSS1 selectors, jQuery fully supports all CSS2/3 selectors regardless of whether or not the current browser supports them.  These selectors can not be used in stylesheets due to the fact that IE7 does not support them.
+		<h2>Immediate Child Selector</h2>
+<pre>
+html: &lt;<strong>div</strong>&gt;&lt;<b>span</b>&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;
+css : <em>div &gt; span</em> { ... }
+</pre>
+
+		<h2>Next Sibling Selector</h2>
+<pre>
+html: &lt;<strong>div</strong>&gt;&lt;/div&gt;&lt;<b>span</b>&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
+css : <em>div + span</em> { ... }
+</pre>
+
+		<h2>Attribute Selector</h2>
+<pre>
+html: &lt;<b>input</b> type="<strong>radio</strong>" /&gt;
+css : input[type="radio"]
+</pre>
+
+		<h2>:checked Pseudo-Selector</h2>
+<pre>
+html: &lt;<b>input</b> type="checkbox" <strong>checked</strong> /&gt;
+css : <em>input:checked</em> { ... }
+</pre>
+
+	</section>
+	<footer>Reference: <a href="http://www.w3.org/TR/css3-selectors/#selectors" target="_blank">CSS Selectors</a></footer>
+</div>
+
+<div class="slide jquery" id="jquery-more-selectors">
+	<section>
+		<header>More CSS 2/3 Selectors</header>
+		<h2>:enabled and :disabled Selectors</h2>
+<pre>
+html: &lt;<b>input</b> <strong>disabled</strong> /&gt;
+css : <em>input:disabled</em> { ... }
+</pre>
+
+		<h2>:not Selector</h2>
+<pre>
+html: &lt;<b>input</b> <strong>disabled</strong> /&gt;
+css : <em>input:not(:enabled)</em> { ... }
+</pre>
+
+		<h2>:even and :odd Selectors</h2>
+<pre>
+html: &lt;<strong>ul</strong>&gt;
+    &lt;<b>li</b>&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;<b>li</b>&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;/li&gt;
+    &lt;<b>li</b>&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+
+css : <em>ul li:odd</em> { ... }            <i>/* jQuery-specific syntax */</i>
+css : <em>ul li:nth-child(odd)</em> { ... } <i>/* normal CSS syntax */</i>
+</pre>
+	</section>
+</div>
+
+
+<div class="slide jquery" id="jquery-sets">
+	<section>
+		<header>Sets</header>
+	</section>
+</div>
+
+<div class="slide jquery" id="jquery-events">
+	<section>
+		<header>Event Listners</header>
 	</section>
 </div>
 
