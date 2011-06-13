@@ -1,4 +1,4 @@
-(function() {
+function initSlides() {
 	var doc = document;
 	var disableBuilds = false;
 	
@@ -175,10 +175,12 @@
 		_onLoad: function() {
 			this._fireEvent('onload');
 			this._showFrames();
+			this._startScripts();
 		},
 		_onUnload: function() {
 			this._fireEvent('onunload');
 			this._hideFrames();
+			this._stopScripts();
 		},
 		_fireEvent: function(name) {
 			var eventSrc = this._node.getAttribute(name);
@@ -211,6 +213,12 @@
 				});
 			}
 			setTimeout(hide, 250);
+		},
+		_startScripts : function(){
+			(window[this._node.id + '-focus'] || $.noop)();
+		},
+		_stopScripts : function(){
+			(window[this._node.id + '-blur'] || $.noop)();
 		},
 		_makeCounter: function() {
 			if(!this._count || !this._node) { return; }
@@ -421,7 +429,7 @@
 			}
 		},
 	};
-	
+
 	// load highlight setting from session storage, if available.
 	// session storage can only store strings so we have to assume type coercion
 	// for the boolean logic here
@@ -433,13 +441,10 @@
 	linkEls.forEach(function(stylesheet) {
 		stylesheet.disabled = !(stylesheet.href.indexOf(stylesheetPath) != -1);
 	});
-	
-	document.addEventListener('DOMContentLoaded', function() {
-		query('.slides').style.display = 'block';
-	}, false);
+
+	query('.slides').style.display = 'block';
 
 	queryAll('pre').forEach(function(el) {
 		addClass(el, 'prettyprint');
 	});
-
-})();
+}

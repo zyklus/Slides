@@ -268,7 +268,6 @@ section, footer {
   text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;
   margin: 100px 30px 0;
   display: block;
-  overflow: hidden;
 }
 
 footer {
@@ -315,7 +314,22 @@ pre button {
 
 section.left {
   float: left;
-  width: 390px;
+  width: 405px;
+	margin-right : 0px;
+}
+
+section.right {
+	float: left;
+  width: 405px;
+	margin-right : 0px;
+}
+
+section section {
+	margin-top    : 10px;
+	margin-bottom : 10px;
+}
+section section.left {
+	margin-left : 0px;
 }
 
 section.small {
@@ -340,25 +354,17 @@ section.middle {
   width: 900px;
 }
 
-section section {
-	margin-top    : 10px;
-	margin-bottom : 10px;
-}
-section section.left {
-	margin-left : 0px;
-}
-section section.right {
-	margin-right : 0px;
-}
-
 pre {
   font-family: 'Inconsolata', Courier;
   letter-spacing: 1px;  
-  background: rgba(255, 64, 0, 0.05);
-  border: 1px solid rgba(255, 64, 0, 0.2);    
   text-align: left;
   font-family: 'Droid Sans Mono', Courier;
   padding: 10px 20px;
+}
+
+pre, code {
+  border: 1px solid rgba(255, 64, 0, 0.2);    
+  background: rgba(255, 64, 0, 0.05);
   -webkit-border-radius: 8px;
   -khtml-border-radius: 8px;
   -moz-border-radius: 8px;

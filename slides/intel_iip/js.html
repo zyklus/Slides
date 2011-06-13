@@ -13,42 +13,93 @@
 <div class="slide javascript" id="js-basics">
 	<header><span class="js">JS</span> <h1>Basic Objects &amp; Operators</h1></header>
 	<section class="left">
+		<h2>"var" keyword</h2><em><b>always</b></em> use it
+
 		<h2>Arrays</h2>
-<pre>var obj = <b>new Array()</b>;
+
+<pre>
+var obj = <b>new Array()</b>;
 var obj = <b>[]</b>;
-var obj = <b>[1, 2, 3]</b>;</pre>
-		<h2>Generic Objects (Like Hash-Tables)</h2>
-<pre>var obj = <b>{}</b>;
-var obj = <b>{ key : 'value',
-        key2 : 42 }</b>;</pre>
+var obj = <b>[1, 2, 3]</b>;
+</pre>
+
 		<h2>&amp;&amp; assignments</h2>
-<pre>var obj = true <b>&&</b> 42; <i>// obj = 42</i></pre>
+
+<pre>
+var obj = true <b>&&</b> 42; <i>// obj = 42</i>
+</pre>
+
 		<h2>|| assignments</h2>
-<pre>var obj = true <b>||</b> 42; <i>// obj = true</i></pre>
+
+<pre>
+var obj = true <b>||</b> 42; <i>// obj = true</i>
+</pre>
+
 		<h2>&amp;&amp; takes precedence</h2>
-<pre>var obj = 3 && 2 || 1 && 0; <i>// 2</i></pre>
+
+<pre>
+var obj = 3 && 2 || 1 && 0; <i>// 2</i>
+</pre>
+
 	</section>
 	<section class="right">
 		<h2>Falsy Values <small>(Evaluate to false)</small></h2>
+
 <pre>false
 undefined
 null
-"" <i>// Empty String</i>
+""  <i>// Empty String</i>
 0
-NaN</pre>
+NaN <i>// "Not a Number", e.g. 0/0</i>
+</pre>
+
 		<h2>Truthy Values <small>(Evaluate to true)</small></h2>
-<pre><em>Everything Else</em>
+
+<pre>
+<em>Everything Else</em>
 ---
-<b>"Strings"</b>
-42 <i>// Numbers</i>
-{} <i>// Objects</i>
-alert <i>// Functions</i></pre>
+"Strings"
+42    <i>// Numbers</i>
+{}    <i>// Objects</i>
+alert <i>// Functions</i>
+</pre>
 	</section>
 </div>
 
 <div class="slide javascript" id="anonymous-functions">
 	<section>
 		<header><span class="js">JS</span> Scope &amp; Anonymous Functions</header>
+		Anonymous functions are used to prevent "leaking" variables to the global scope.  Since global variables are accessible to all scripts, this can cause issues with commonly named variables.
+
+<pre>
+(function(){ <i>// Anonymous function declaration</i>
+  var x, y, z;
+})();        <i>// Close and immediately call the anonymous function</i>
+
+<i>// x, y, z not accessible here</i>
+</pre>
+
+		Note that JavaScript does <b>not</b> have block-level scope:
+
+<pre>for( ... ){
+  var x = 0;
+}
+<i>// x == 0</i>
+</pre>
+
+		Scope is bound to the nearest nested function
+
+<pre>
+function(){
+  var x = 20;
+
+  (function(){
+    var x = 40, y=40;
+  })();
+
+  // x = 20, y = undefined
+}
+</pre>
 	</section>
 </div>
 
@@ -57,9 +108,9 @@ alert <i>// Functions</i></pre>
 	<section>Closures are created whenever you have nested functions in JavaScript.  Internal functions are allowed to access external variables, even if called at a later point in the script execution.
 		<section class="left">
 <pre><strong>function</strong> multiplyBy( <b>a</b> ){
-	return <strong>function</strong>( <em>b</em> ){
-		return <b>a</b> * <em>b</em>;
-	}
+  return <strong>function</strong>( <em>b</em> ){
+    return <b>a</b> * <em>b</em>;
+  }
 }
 
 var times10 = multiplyBy( 10 );

@@ -10,10 +10,17 @@
 </div>
 
 <div class="slide debug" id="firebug-intro">
+	<style>
+	#firebug-intro iframe {
+    	width      : 840px;
+    	height     : 472px;
+    	border     : none;
+    }
+	</style>
 	<section>
 		<header>Introduction to Firebug</header>
 		<h2>The Firefox Debugger</h2>
-		<video src="http://getfirebug.com/video/Intro2FB.mp4" controls="controls" width="840" height="472"></video>
+		<iframe _src="slides/intel_iip/firebug_video.html"></iframe>
 		<footer>Reference: <a href="http://www.getfirefox.com" target="_blank">Download Firefox</a> | <a href="http://www.getfirebug.com" target="_blank">Download Firebug</a></footer>
 	</section>
 </div>
@@ -22,6 +29,8 @@
 	<section>
 		<header>Other Debuggers</header>
 		Both the Chrome and Internet Explorer debuggers have similar functionality to Firebug.
+		<h2>Firebug</h2>
+			Open by clicking the icon at the bottom-right of the browser or by pressing <kbd>F12</kbd>
 		<h2>Google Chrome</h2>
 		Comes with a excellent debugger built in.  To access it, go to <b>View --> Developer --> Developer tools</b> or press:
 		<ul>
@@ -29,10 +38,8 @@
 			<li>Mac: <kbd>⌥</kbd> + <kbd>⌘</kbd> + <kbd>i</kbd></li>
 		</ul>
 		<h2>Internet Explorer</h2>
-		IE8 and IE9 both come with build in debuggers.  To access, go to <b>View --> Developer Tools</b> or press:
-		<ul>
-			<li><kbd>F12</kbd></li>
-		</ul>
+		IE8 and IE9 both come with build in debuggers.  To access, go to <b>View --> Developer Tools</b> or press <kbd>F12</kbd>
+		<br /><br />
 		Note: Internet Explorer developer tools are buggy.  It is strongly suggested that most debugging be done in either Firefox or Chrome, and the Internet Explorer debugging tools used to solve IE-specific issues.
 		<br /><br />
 		One of the main issues is that IE does not display updated HTML since the debugger was opened.  This means popup content, etc will not be displayed unless they were opened before the debugger was opened.

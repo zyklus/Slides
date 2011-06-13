@@ -1,6 +1,5 @@
 (function(){
 	var slideset = /[^/.]+(?=.slides)/.exec(location.href)[0];
-
 	$.get('slides/' + slideset + '.html', function(html){
 		$('.slides').html(html);
 		loadSlideSets();
@@ -27,6 +26,8 @@
 	};
 
 	function initSlideShow(){
+		initSlides();
+		prettyPrint();
 		var slideshow = new SlideShow($('.slide').get());
 	}
 })();
